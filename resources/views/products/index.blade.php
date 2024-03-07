@@ -10,6 +10,7 @@
 </head>
 <body>
     {{-- @dd($products); --}}
+    <a href="{{ route('products.create')}}">New Product</a>
     <table class="table">
         <thead>
             <tr>
@@ -32,6 +33,7 @@
             <td>{{ $product-> price }}</td>
             <td>{{ $product-> created_at }}</td>
             <td>{{ $product-> updated_at }}</td>
+            <td><a href="{{route('products.edit', $product->id)}}">Edit</a></td>
           </tr>
         </tbody>
         @endforeach
