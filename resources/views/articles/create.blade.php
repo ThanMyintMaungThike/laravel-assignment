@@ -1,5 +1,4 @@
-@extends("layouts.app")
-@section('content')
+
     <form class="container"  action="{{route('articles.store')}}" method="POST">
         @csrf
         @if($errors->any())
@@ -29,5 +28,5 @@
         </div>
         <button value="submit" class="btn btn-primary">Submit</button>
     </form>
-@endsection
+
 
