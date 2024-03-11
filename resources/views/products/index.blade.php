@@ -1,5 +1,5 @@
 @extends("layouts.app")
-@section('content')
+@section("content")
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,9 +8,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Product List</title>
 </head>
-<body>
+<body class="container">
+    <h1>Product List</h1>
     {{-- @dd($products); --}}
-    <a href="{{ route('products.create')}}">New Product</a>
+    <a class="btn btn-warning" href="{{ route('products.create')}}">New Product</a>
     <table class="table">
         <thead>
             <tr>
@@ -21,6 +22,8 @@
                 <th scope="col">Price</th>
                 <th scope="col">Created At</th>
                 <th scope="col">Updated At</th>
+                <th class="text-center" colspan="2">Action</th>
+                <th scope="col"></th>
             </tr>
         </thead>
         @foreach ($products as $product)
@@ -33,7 +36,13 @@
             <td>{{ $product-> price }}</td>
             <td>{{ $product-> created_at }}</td>
             <td>{{ $product-> updated_at }}</td>
-            <td><a href="{{route('products.edit', $product->id)}}">Edit</a></td>
+            <td><a class="btn btn-info" href="{{route('products.edit', $product->id)}}">Edit</a></td>
+            <td>
+                <form action="{{route('products.delete', $product->id)}}" method="POST">
+                    @csrf
+                    <button class="btn btn-primary" value="submit">Delete</button>
+                </form>
+            </td>
           </tr>
         </tbody>
         @endforeach
