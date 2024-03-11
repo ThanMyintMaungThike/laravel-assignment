@@ -17,8 +17,13 @@ class ProductController extends Controller
     public function create() {
         return view('products.create');
     }
-    public function save(Request $req) {
+    public function store(Request $req) {
         // dd($req-> all());
+        $req->validate([
+            'name' => ['required', 'string'],
+            'description' => ['required','string'],
+          'status' => ['required','string'],
+        ]);
         Product::create([
             'name' => $req->name,
             'description' => $req->description,
@@ -45,5 +50,9 @@ class ProductController extends Controller
         ]);
         return redirect()->route('products.home');
 
+    }
+    public function delete($id) {
+        Product::find($id)->delete();
+        return redirect()->route('products.home');
     }
 }
