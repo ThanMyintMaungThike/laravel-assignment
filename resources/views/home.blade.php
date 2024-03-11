@@ -19,5 +19,11 @@
             </div>
         </div>
     </div>
+    <button class="border-0">
+        <a class="btn btn-warning" href="{{route('articles.index')}}">Articles
+        </a>
+        <a class="btn btn-success" href="{{route('products.home')}}">Products
+        </a>
+    </button>
 </div>
 @endsection
