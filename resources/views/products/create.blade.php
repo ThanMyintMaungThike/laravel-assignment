@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section("content")
-<form class='container' action="{{route('products.store')}}" method="POST">
+<form class='container' action="{{route('products.store')}}"
+method="POST" enctype="multipart/form-data">
     @csrf
     @if($errors->any())
         <div class="alert alert-danger">
@@ -26,6 +27,10 @@
         @endif --}}
     </div>
     <div class="form-group mb-3">
+        <label for="">Select Image</label>
+        <input type="file" class="form-control" name="image">
+    </div>
+    <div class="form-group mb-3">
         <label for="">Status</label>
         <select class="form-control" name="status" id="">
             <option value="1">true</option>
@@ -37,7 +42,7 @@
     </div>
     <div class="form-group mb-3">
         <label for="">Price</label>
-        <input class="form-control" type="text" name='price'>
+        <input class="form-control" type="number" name='price'>
         {{-- @if($errors->first('price'))
         <span class="form-text text-muted" style="color: red;">{{$errors->first('price')}}</span>
         @endif --}}

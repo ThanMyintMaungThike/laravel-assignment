@@ -21,6 +21,7 @@ class ArticleFactory extends Factory
             'slug' => fake()->slug(),
             'context'=>fake()->sentence(),
             'excerpt' => fake()->sentence(),
+            'image' => fake()->image(),
         ];
     }
 }
