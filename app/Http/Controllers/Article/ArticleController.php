@@ -8,12 +8,14 @@ use Illuminate\Http\Request;
 
 class ArticleController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $articles = Article::all();
+        $articles = Article::with('ArticleImages')->get();
+        // $articles = Article::all();
         // dd($articles);
         return view('articles.index', compact(
             'articles'
@@ -43,20 +45,44 @@ class ArticleController extends Controller
     public function store(Request $request)
     {
         // dd($request);
-        $request ->validate([
-            'title' => ['required', 'string'],
-            'slug' => ['required', 'string', 'unique'],
-            'context' => [ 'required', 'text'],
-            'excerpt' => ['required', 'text'],
-        ]);
+        // $request->validate([
+        //     'title' => ['required','string'],
+        //   'slug' => ['required','string'],
+        //   'context' => ['required','string'],
+        //   'excerpt' => ['required','string'],
+        //   'image.*' => ['required', 'array'],
+        //   'image.*' => ['mimes:png, jpg']
+
+        // ]);
+        dd($request->image);
+
+        $imageName = time().'.'.$request->image->getClientOriginalExtension();
+
+        $request->image->move(public_path('/uploadedimages'), $imageName);
+        // $input = $request->all();
+        // $images = array();
+        // if($files=$request->file('images')) {
+        //     foreach($files as $file) {
+        //         $imgName = uniqid().".".$file->getClientOriginalExtension();
+        //         $file->move(public_path('/uploadedimages'), $imgName);
+        //         $images[] = $imgName;
+
+        //     }
+        // }
+
+        // $path = $request->file('image')->store('article');
+        // $imgName = time().'.'.$request->image->getClientOriginalExtension();
+        // $request->image->move(public_path('/uploadedimages'), $imgName);
         Article::create([
             'title' => $request->title,
           'slug' => $request->slug,
             'context' => $request->context,
-            'excerpt' => $request->excerpt
+            'excerpt' => $request->excerpt,
+            'image'=>  $imageName,
         ]);
-        $articles = Article::all();
-        return view('articles.index', compact('articles'));
+        // $articles = Article::all();
+        // return view('articles.index', compact('articles'));
+        return redirect()->route('articles.index');
     }
 
     /**

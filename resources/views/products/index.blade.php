@@ -1,4 +1,4 @@
-@extends("layouts.app")
+@extends("layouts.master")
 @section("content")
 <!DOCTYPE html>
 <html lang="en">
@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Product List</title>
 </head>
-<body class="container">
+<body>
     <h1>Product List</h1>
     {{-- @dd($products); --}}
     <a class="btn btn-warning" href="{{ route('products.create')}}">New Product</a>
@@ -18,6 +18,8 @@
                 <th scope="col">#</th>
                 <th scope="col">Name</th>
                 <th scope="col">Description</th>
+                <th scope="col">Image</th>
+
                 <th scope="col">Status</th>
                 <th scope="col">Price</th>
                 <th scope="col">Created At</th>
@@ -32,6 +34,10 @@
             <th scope="row">{{ $product-> id }}</th>
             <td>{{ $product-> name }}</td>
             <td>{{ $product-> description }}</td>
+            <td>
+                {{-- @dd($product->image); --}}
+                <img src="{{asset('storage/uploadedimages/'.$product->image) }}" alt="" width="100px">
+            </td>
             <td>{{ $product-> status }}</td>
             <td>{{ $product-> price }}</td>
             <td>{{ $product-> created_at }}</td>

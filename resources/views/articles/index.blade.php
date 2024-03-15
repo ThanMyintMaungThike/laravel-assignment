@@ -1,4 +1,4 @@
-@extends("layouts.app")
+@extends("layouts.master")
 @section('content')
 <!DOCTYPE html>
 <html lang="en">
@@ -20,6 +20,8 @@
                 <th scope="col">Slug</th>
                 <th scope="col">Context</th>
                 <th scope="col">Excerpt</th>
+                <th scope="col">Photo</th>
+
                 <th scope="col">Created At</th>
                 <th scope="col">Updated At</th>
                 <th colspan="2" class="text-center">Action</th>
@@ -27,6 +29,7 @@
             </tr>
         </thead>
         @foreach ($articles as $article)
+        {{-- @dd($article); --}}
         <tbody>
           <tr>
             <th scope="row">{{ $article-> id }}</th>
@@ -34,6 +37,10 @@
             <td>{{ $article-> slug }}</td>
             <td>{{ $article-> context }}</td>
             <td>{{ $article-> excerpt }}</td>
+            <td>
+                {{-- @dd($article->image); --}}
+                <img src="{{asset('uploadedimages/'.$article->image) }}" alt="" width="100px">
+            </td>
             <td>{{ $article-> created_at }}</td>
             <td>{{ $article-> updated_at }}</td>
             <td><a class="btn btn-info" href="{{route('articles.edit', $article->id)}}">Edit</a></td>

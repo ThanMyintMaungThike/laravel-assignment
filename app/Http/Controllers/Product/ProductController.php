@@ -26,11 +26,16 @@ class ProductController extends Controller
         $req->validate([
             'name' => ['required', 'string'],
             'description' => ['required','string'],
+            'image' => ['required'],
           'status' => ['required','string'],
+          'price' => ['required','integer'],
         ]);
+        $imgName = time().'.'.$req->image->getClientOriginalExtension();
+        $req->image->move(public_path('/storage/uploadedimages'), $imgName);
         Product::create([
             'name' => $req->name,
             'description' => $req->description,
+            'image' => $imgName,
             'status' => $req->status,
             'price' => $req->price,
         ]);
